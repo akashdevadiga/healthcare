@@ -6,29 +6,29 @@ class RoleService {
     this.roleRepository = roleRepository;
   }
 
-  async getAllUsers() {
+  async getAllRoles() {
     return this.roleRepository.findAll();
   }
 
-  async updateUser(id, updates) {
+  async updateRole(id, updates) {
     if (!updates || Object.keys(updates).length === 0) {
       throw new AppError('No fields provided to update', 400);
     }
 
-    const user = await this.userRepository.updateById(id, updates);
+    const role = await this.roleRepository.updateById(id, updates);
 
-    if (!user) {
-      throw new AppError('User not found', 404);
+    if (!role) {
+      throw new AppError('Role not found', 404);
     }
 
-    return user;
+    return role;
   }
 
-  async deleteUser(id) {
-    const deleted = await this.userRepository.deleteById(id);
+  async deleteRole(id) {
+    const deleted = await this.roleRepository.deleteById(id);
 
     if (!deleted) {
-      throw new AppError('User not found', 404);
+      throw new AppError('Role not found', 404);
     }
 
     return deleted;

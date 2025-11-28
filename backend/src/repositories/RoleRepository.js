@@ -10,7 +10,7 @@ class RoleRepository {
       .order('created_at', { ascending: false });
 
     if (error) {
-      throw new Error(`Failed to fetch users: ${error.message}`);
+      throw new Error(`Failed to fetch roles: ${error.message}`);
     }
 
     return data;
@@ -27,7 +27,7 @@ class RoleRepository {
       .maybeSingle();
 
     if (error) {
-      throw new Error(`Failed to update user: ${error.message}`);
+      throw new Error(`Failed to update role: ${error.message}`);
     }
 
     return data; // null when no row matches
@@ -42,7 +42,7 @@ class RoleRepository {
       .maybeSingle();
 
     if (error) {
-      throw new Error(`Failed to delete user: ${error.message}`);
+      throw new Error(`Failed to delete role: ${error.message}`);
     }
 
     return data; // null when no row matches
