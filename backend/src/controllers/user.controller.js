@@ -4,7 +4,7 @@ const userService = new UserService();
 
 export const listUsers = async (req, res, next) => {
   try {
-    const users = await userService.getAllUsers();
+    const users = await userService.getAllUsers({ search: req.query.search });
     return res.status(200).json(users);
   } catch (error) {
     return next(error);
