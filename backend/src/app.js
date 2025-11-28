@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import userRoutes from './routes/user.routes.js';
+import shiftRoutes from './routes/shift.routes.js';
 import errorHandler from './middleware/errorHandler.js';
 import AppError from './utils/AppError.js';
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/users', userRoutes);
+app.use('/shifts', shiftRoutes);
 
 app.use((req, res, next) => next(new AppError('Not Found', 404)));
 
