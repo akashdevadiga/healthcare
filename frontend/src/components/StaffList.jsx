@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import AddStaffModal from './AddStaffModal'
 
 const API_URL = 'http://localhost:4000/users'
 
@@ -34,28 +35,10 @@ export default function StaffList() {
     const [staff, setStaff] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
         fetchStaffData();
-        // let mounted = true
-        // setLoading(true)
-        // axios
-        //     .get(API_URL)
-        //     .then((res) => {
-        //         if (!mounted) return
-        //         setStaff(res.data || FALLBACK)
-        //     })
-        //     .catch((err) => {
-        //         console.warn('Failed to fetch users, using fallback', err.message)
-        //         if (!mounted) return
-        //         setStaff(FALLBACK)
-        //         setError('Failed to load users from API; using local mock data')
-        //     })
-        //     .finally(() => mounted && setLoading(false))
-
-        // return () => {
-        //     mounted = false
-        // }
     }, [])
 
     async function fetchStaffData() {
@@ -64,9 +47,18 @@ export default function StaffList() {
             const res = await axios.get(API_URL);
             setStaff(res.data);
             setLoading(false)
-        } catch (err) { 
+        } catch (err) {
             console.log("err:", err);
+            console.warn('Failed to fetch users, using fallback', err.message)
+            setStaff(FALLBACK)
+            setError('Failed to load users from API; using local mock data')
+        } finally {
+            setLoading(false);
         }
+    }
+
+    function handleAddStaffSuccess(newStaff) {
+        setStaff([...staff, newStaff])
     }
 
     function exportCsv() {
@@ -89,7 +81,7 @@ export default function StaffList() {
                     <h1 className="text-2xl font-bold">Staff List</h1>
                     <div className="flex items-center gap-2">
                         <button onClick={exportCsv} className="bg-indigo-600 text-white px-3 py-1.5 rounded">Export CSV</button>
-                        <button className="bg-green-600 text-white px-3 py-1.5 rounded">Add Staff</button>
+                        <button onClick={() => setIsModalOpen(true)} className="bg-green-600 text-white px-3 py-1.5 rounded">Add Staff</button>
                     </div>
                 </div>
 
@@ -128,6 +120,12 @@ export default function StaffList() {
                     </div>
                 )}
             </div>
+
+            <AddStaffModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)}
+                onSuccess={handleAddStaffSuccess}
+            />
         </div>
     )
 }
