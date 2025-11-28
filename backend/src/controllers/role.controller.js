@@ -11,7 +11,7 @@ export const listRoles = async (req, res, next) => {
   }
 };
 
-export const updateRole = async (req, res, next) => {
+export const updateRoles = async (req, res, next) => {
   try {
     const updated = await roleService.updateRole(req.params.id, req.body);
     return res.status(200).json(updated);
