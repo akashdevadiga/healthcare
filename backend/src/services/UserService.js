@@ -10,6 +10,10 @@ class UserService {
     return this.userRepository.findAll();
   }
 
+  async createUser(userData) {
+    return this.userRepository.create(userData);
+  }
+
   async updateUser(id, updates) {
     if (!updates || Object.keys(updates).length === 0) {
       throw new AppError('No fields provided to update', 400);

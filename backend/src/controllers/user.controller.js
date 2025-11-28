@@ -11,6 +11,15 @@ export const listUsers = async (req, res, next) => {
   }
 };
 
+export const createUser = async (req, res, next) => {
+  try {
+    const user = await userService.createUser(req.body);
+    return res.status(201).json(user);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 export const updateUser = async (req, res, next) => {
   try {
     const updated = await userService.updateUser(req.params.id, req.body);

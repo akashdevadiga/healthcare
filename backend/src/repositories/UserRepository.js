@@ -16,6 +16,22 @@ class UserRepository {
     return data;
   }
 
+  async create(userData) {
+    const { data, error } = await supabase
+      .from('users')
+      .insert([userData])
+      .select(
+        'id, name, id_role, contact_number, shift_preference, created_at, updated_at',
+      )
+      .maybeSingle();
+
+    if (error) {
+      throw new Error(`Failed to create user: ${error.message}`);
+    }
+
+    return data;
+  }
+
   async updateById(id, updates) {
     const { data, error } = await supabase
       .from('users')
