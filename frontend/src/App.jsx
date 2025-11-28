@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom
 import { LoginPage } from './components/LoginPage'
 import { HomePage } from './components/HomePage'
 import { Dashboard } from './components/Dashboard'
+import StaffList from './components/StaffList'
 import { About } from './components/About'
 import { Contact } from './components/Contact'
 import { NavBar } from './components/NavBar'
@@ -28,6 +29,7 @@ function App() {
         {/* Routes wrapped with Layout will render the NavBar */}
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/staff" element={<StaffList />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Route>

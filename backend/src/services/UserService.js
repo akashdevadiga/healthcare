@@ -6,8 +6,12 @@ class UserService {
     this.userRepository = userRepository;
   }
 
-  async getAllUsers() {
-    return this.userRepository.findAll();
+  async getAllUsers({ search } = {}) {
+    return this.userRepository.findAll({ search });
+  }
+
+  async createUser(userData) {
+    return this.userRepository.create(userData);
   }
 
   async updateUser(id, updates) {

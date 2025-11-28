@@ -17,6 +17,7 @@ export function NavBar() {
 
           <nav className="hidden md:flex items-center gap-4">
             <Link to="/dashboard" className="text-gray-700 hover:text-indigo-600">Dashboard</Link>
+            <Link to="/staff" className="text-gray-700 hover:text-indigo-600">Staff</Link>
             <Link to="/about" className="text-gray-700 hover:text-indigo-600">About</Link>
             <Link to="/contact" className="text-gray-700 hover:text-indigo-600">Contact</Link>
             <Link to="/login" className="bg-indigo-600 text-white px-3 py-1.5 rounded-md">Login</Link>
@@ -43,6 +44,7 @@ export function NavBar() {
         <div className="md:hidden bg-white border-t">
           <div className="px-4 pt-2 pb-4 space-y-1">
             <Link to="/dashboard" className="block px-2 py-2 rounded hover:bg-gray-50">Dashboard</Link>
+            <Link to="/staff" className="block px-2 py-2 rounded hover:bg-gray-50">Staff</Link>
             <Link to="/about" className="block px-2 py-2 rounded hover:bg-gray-50">About</Link>
             <Link to="/contact" className="block px-2 py-2 rounded hover:bg-gray-50">Contact</Link>
             <Link to="/login" className="block px-2 py-2 rounded bg-indigo-600 text-white text-center">Login</Link>

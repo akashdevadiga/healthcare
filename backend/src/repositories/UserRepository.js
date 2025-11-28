@@ -1,16 +1,38 @@
 import supabase from '../db/supabase.js';
 
 class UserRepository {
-  async findAll() {
-    const { data, error } = await supabase
+  async findAll({ search } = {}) {
+    let query = supabase
       .from('users')
       .select(
         'id, name, id_role, contact_number, shift_preference, created_at, updated_at',
       )
       .order('created_at', { ascending: false });
 
+    if (search) {
+      query = query.ilike('name', `%${search}%`);
+    }
+
+    const { data, error } = await query;
+
     if (error) {
       throw new Error(`Failed to fetch users: ${error.message}`);
+    }
+
+    return data;
+  }
+
+  async create(userData) {
+    const { data, error } = await supabase
+      .from('users')
+      .insert([userData])
+      .select(
+        'id, name, id_role, contact_number, shift_preference, created_at, updated_at',
+      )
+      .maybeSingle();
+
+    if (error) {
+      throw new Error(`Failed to create user: ${error.message}`);
     }
 
     return data;
